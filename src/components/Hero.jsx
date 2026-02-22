@@ -7,8 +7,8 @@ import burung from '../assets/burung.webp';
 
 const Hero = () => {
   return (
-    <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden bg-[#E0F2FE]">
-      
+    <section id='hero' className="relative h-screen flex flex-col items-center justify-center overflow-hidden bg-[#E0F2FE]">
+
       {/* 1. Background Layering */}
       <div className="absolute inset-0 bg-[#D7E9F7] opacity-50" />
       <div className="absolute inset-0 opacity-20 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/watercolor-paper.png')] mix-blend-multiply" />

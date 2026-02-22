@@ -26,7 +26,7 @@ const GuestBook = () => {
   };
 
   return (
-    <section className="py-24 px-6 bg-[#E0F2FE] relative overflow-hidden">
+    <section id='guestbook' className="py-24 px-6 bg-[#E0F2FE] relative overflow-hidden">
       <div className="max-w-md mx-auto text-center relative z-10">
         <h3 className="text-4xl font-serif italic text-[#334155] mb-2">Doa & Ucapan</h3>
         <p className="text-sm text-[#64748b] mb-10 italic">Berikan doa terbaik Anda untuk kami.</p>

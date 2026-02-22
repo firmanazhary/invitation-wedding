@@ -4,7 +4,7 @@ import bunga from '../assets/bunga.png'; // Aset mawar besar
 
 const Nasehat = () => {
   return (
-    <section className="relative py-24 px-8 bg-[#E0F2FE] overflow-hidden">
+    <section id='nasehat' className="relative py-24 px-8 bg-[#E0F2FE] overflow-hidden">
       {/* 1. Background Decor */}
       <div className="absolute inset-0 bg-[#D7E9F7] opacity-50" />
       <div className="absolute inset-0 opacity-15 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/watercolor-paper.png')] mix-blend-multiply" />
