@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import { useSearchParams, BrowserRouter } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
-// Import semua komponen yang sudah dibuat
+// Import komponen
 import Curtain from './components/Curtain';
 import Butterfly from './components/Butterfly';
 import Countdown from './components/Countdown';
@@ -14,59 +14,60 @@ import Navbar from './components/Navbar';
 import Verse from './components/Verse';
 import Mempelai from './components/Mempelai';
 import SaveTheDate from './components/SaveTheDate';
-import nasyid from './assets/nasyid.mpeg';
 import Adab from './components/Adab';
 import LoveStory from './components/LoveStory';
-
 import Doa from './components/Doa';
 import Closing from './components/Closing';
 import Footer from './components/Footer';
+import Nasehat from './components/Nasehat';
+
+// Import MusicPlayer yang baru dibuat
+import MusicPlayer from './components/Nasyid'; 
+
 function AppContent() {
   const [searchParams] = useSearchParams();
   const guestName = searchParams.get('to') || 'Tamu Undangan';
   const [isOpen, setIsOpen] = useState(false);
-  const audioRef = useRef(null);
 
+  // Fungsi untuk buka undangan
   const handleOpen = () => {
     setIsOpen(true);
-    if (audioRef.current) {
-      audioRef.current.play();
-    }
   };
 
-  // RETURN HARUS DI DALAM FUNGSI AppContent
   return (
-    <div className="relative overflow-x-hidden">
-      <audio ref={audioRef} loop src={nasyid} />
+    /* Mengubah bg default ke biru muda agar seragam dengan semua komponen */
+    <div className="relative overflow-x-hidden bg-[#E0F2FE]">
+      
+      {/* 1. Komponen MusicPlayer (Diletakkan di luar div isOpen agar posisinya fixed) */}
+      <MusicPlayer isOpen={isOpen} />
 
       <AnimatePresence>
         {!isOpen && <Curtain guestName={guestName} onOpen={handleOpen} />}
       </AnimatePresence>
       
       {isOpen && (
-        <div className="bg-[#FAF9F6]">
-            <Navbar />
+        <div className="bg-[#E0F2FE]">
+          <Navbar />
           <Butterfly />
           <FlowerDecoration />
           
           <main className="relative z-20">
-            {/* Section Hero & Countdown */}
             <Hero />
-              <Verse/>
-              <Mempelai />
+            <Verse />
+            <Mempelai />
             <Countdown targetDate={DATA_PENGANTIN.acara.tanggal} />
-              <LoveStory />
+            <LoveStory />
             <SaveTheDate />
 
-   {/* Section Guestbook */}
-            <section className="max-w-xl mx-auto p-8 pb-20">
+            <section className="max-w-xl mx-auto py-8">
                <GuestBook guestName={guestName} />
             </section>
+            
             <Adab />
-              <Doa />
-              <Closing />
-
-          <Footer />
+            <Nasehat />
+            <Doa />
+            <Closing />
+            <Footer />
           </main>
         </div>
       )}
@@ -74,7 +75,6 @@ function AppContent() {
   );
 }
 
-// Wrapper untuk React Router
 export default function App() {
   return (
     <BrowserRouter>

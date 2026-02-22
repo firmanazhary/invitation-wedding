@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Calendar } from 'lucide-react';
 import { DATA_PENGANTIN } from '../constans/content';
-import bunga from '../assets/bunga.png'; // Aset mawar besar
+import bunga from '../assets/bunga.png'; 
 
 import burung from '../assets/burung.webp';
 
@@ -13,8 +13,8 @@ const Hero = () => {
       <div className="absolute inset-0 bg-[#D7E9F7] opacity-50" />
       <div className="absolute inset-0 opacity-20 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/watercolor-paper.png')] mix-blend-multiply" />
       
-      {/* 2. Wayang Transparan (Kiri & Kanan) - Biar lebih rame & sakral */}
-
+      {/* 2. Wayang Transparan (Kiri & Kanan) - Sakral dan Rame */}
+ 
 
       {/* 3. Burung Terbang Melintas */}
       <div className="absolute inset-0 pointer-events-none z-10">
@@ -30,7 +30,7 @@ const Hero = () => {
         ))}
       </div>
 
-      {/* 4. Ornamen Bunga Mawar Besar di 4 Sudut - Efek Bingkai Mewah */}
+      {/* 4. Ornamen Bunga Mawar Besar di 4 Sudut */}
       <motion.img
         src={bunga}
         animate={{ rotate: [0, 2, 0], scale: [1, 1.02, 1] }}
@@ -54,13 +54,16 @@ const Hero = () => {
 
       {/* 5. Main Content */}
       <div className="z-30 text-center px-6">
-        <motion.p 
-          initial={{ opacity: 0, letterSpacing: "0.1em" }}
-          whileInView={{ opacity: 1, letterSpacing: "0.4em" }}
-          className="text-blue-600 uppercase text-[10px] md:text-xs mb-8 font-sans font-bold"
+        {/* PERBAIKAN: Walimatul Ursy dibuat lebih kontras dengan background pill */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="bg-white/60 backdrop-blur-sm border border-white inline-block px-6 py-2 rounded-full mb-8 shadow-sm"
         >
-          Walimatul Ursy
-        </motion.p>
+          <p className="text-blue-700 tracking-[0.4em] uppercase text-[10px] md:text-xs font-sans font-black">
+            Walimatul Ursy
+          </p>
+        </motion.div>
         
         <motion.h1 
           initial={{ scale: 0.8, opacity: 0 }}
@@ -69,7 +72,7 @@ const Hero = () => {
           className="text-5xl md:text-8xl font-serif font-bold text-[#334155] mb-8 drop-shadow-sm"
         >
           {DATA_PENGANTIN.pria.nama} <br /> 
-          <span className="text-blue-500 italic text-4xl md:text-6xl my-4 block">&</span>
+          <span className="text-blue-500 italic text-4xl md:text-6xl my-4 block drop-shadow-md">&</span>
           {DATA_PENGANTIN.wanita.nama}
         </motion.h1>
 
@@ -79,8 +82,8 @@ const Hero = () => {
           transition={{ delay: 0.8 }}
           className="space-y-6"
         >
-          <div className="inline-block border-y border-blue-200 py-2 px-6">
-            <p className="text-xl md:text-2xl text-[#64748b] font-serif italic">
+          <div className="inline-block border-y-2 border-blue-200/50 py-3 px-8">
+            <p className="text-xl md:text-2xl text-[#64748b] font-serif italic tracking-wide">
               Sabtu, 12 September 2026
             </p>
           </div>
@@ -88,14 +91,14 @@ const Hero = () => {
           <motion.button 
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="bg-[#38BDF8] text-white px-10 py-3 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg shadow-blue-200 flex items-center gap-2 mx-auto transition-all"
+            className="bg-[#38BDF8] text-white px-10 py-4 rounded-full text-xs font-black uppercase tracking-widest shadow-lg shadow-blue-200 flex items-center gap-2 mx-auto transition-all border border-white/20"
           >
             <Calendar size={16} /> Save the date
           </motion.button>
         </motion.div>
       </div>
 
-      {/* Efek Partikel Salju Putih (Biar makin rame & elegan) */}
+      {/* Efek Partikel Salju Putih */}
       <div className="absolute inset-0 pointer-events-none z-10">
         {[...Array(15)].map((_, i) => (
           <motion.span

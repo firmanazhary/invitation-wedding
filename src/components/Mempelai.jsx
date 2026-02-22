@@ -2,95 +2,102 @@ import { motion } from 'framer-motion';
 import { DATA_PENGANTIN } from '../constans/content';
 import manImage from '../assets/man-image.png';
 import womanImage from '../assets/woman-image.png';
+import bunga from '../assets/bunga.png'; // Aset mawar besar
 import { Instagram } from 'lucide-react';
 
 const Mempelai = () => {
   return (
-    /* Mengubah bg-[#FAF9F6] menjadi bg-[#E0F2FE] untuk menjaga kontinuitas warna biru */
     <section className="py-24 px-8 bg-[#E0F2FE] relative overflow-hidden">
-      
-      {/* Background Watercolor Texture yang disesuaikan */}
+      {/* 1. Background Layering */}
       <div className="absolute inset-0 bg-[#D7E9F7] opacity-50" />
-      <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/watercolor-paper.png')] mix-blend-multiply" />
+      <div className="absolute inset-0 opacity-15 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/watercolor-paper.png')] mix-blend-multiply" />
 
+   
       <div className="max-w-md mx-auto text-center relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="mb-12 space-y-4"
+          className="mb-16 space-y-4"
         >
           <div className="mb-10">
-            {/* Warna teks Arab diganti ke Slate gelap (#334155) agar lebih kontras di atas biru */}
-            <p className="text-2xl md:text-3xl font-serif text-[#334155] leading-loose" dir="rtl">
+            <p className="text-2xl md:text-3xl font-serif text-[#334155] leading-loose drop-shadow-sm" dir="rtl">
               بِسْمِ اللّهِ الرَّحْمَنِ الرَّحِيْمِ
             </p>
           </div>
-          <p className="text-sm italic text-[#475569] leading-relaxed px-4">
+          <p className="text-sm italic text-[#475569] leading-relaxed px-4 font-medium">
             Maha suci Allah yang telah menciptakan makhluk-Nya berpasang-pasangan. Ya Allah perkenankanlah kami membentuk keluarga yang sakinah, mawaddah, warahmah.
           </p>
         </motion.div>
 
         {/* Profil Mempelai Pria */}
-        <motion.div 
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mb-20"
-        >
-          <h3 className="text-3xl font-serif font-bold text-[#334155] mb-2">
-            {DATA_PENGANTIN.pria.nama}
-          </h3>
-          <p className="text-xs text-[#64748b] mb-6 uppercase tracking-widest font-bold">
-            Putra ke-2 dari Bapak {DATA_PENGANTIN.pria.ayah} dan Ibu {DATA_PENGANTIN.pria.ibu}
-          </p>
+        <div className="relative mb-32">
+          {/* Mawar Dekorasi di Sekitar Foto Pria */}
+          <motion.img 
+            src={bunga} 
+            animate={{ rotate: [0, 5, 0] }}
+            transition={{ duration: 4, repeat: Infinity }}
+            className="absolute -top-10 -right-10 w-48 opacity-80 z-20 pointer-events-none" 
+          />
           
-          {/* Bingkai Foto Arch Pria */}
-          <div className="relative w-56 h-72 mx-auto rounded-t-full border-4 border-white shadow-2xl overflow-hidden mb-4 bg-stone-100">
-             <img 
-               src={manImage}
-               alt="Mempelai Pria"
-               /* Mengurangi grayscale agar foto lebih hidup di tema biru */
-               className="w-full h-full object-cover grayscale-[10%]"
-             />
-          </div>
-          {/* Mengganti warna teks tombol Instagram ke Biru (#38BDF8) sesuai palet Curtain */}
-          <button className="text-[#38BDF8] flex items-center justify-center gap-2 mx-auto text-xs font-bold uppercase tracking-wider">
-            <Instagram size={14} /> @{DATA_PENGANTIN.pria.nama.toLowerCase()}
-          </button>
-        </motion.div>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            className="relative z-10"
+          >
+            <h3 className="text-4xl font-serif font-bold text-[#334155] mb-2 drop-shadow-sm italic">
+              {DATA_PENGANTIN.pria.nama}
+            </h3>
+            <p className="text-[10px] text-[#64748b] mb-8 uppercase tracking-[0.2em] font-black border-y border-[#38BDF8]/20 inline-block py-1">
+              Putra ke-2 dari Bapak {DATA_PENGANTIN.pria.ayah} & Ibu {DATA_PENGANTIN.pria.ibu}
+            </p>
+            
+            <div className="relative w-64 h-80 mx-auto rounded-t-full border-8 border-white shadow-[0_20px_50px_rgba(0,0,0,0.15)] overflow-hidden mb-6 bg-blue-50">
+               <img src={manImage} alt="Pria" className="w-full h-full object-cover brightness-105" />
+            </div>
+            
+            <button className="bg-white/50 backdrop-blur-sm border border-[#38BDF8]/30 px-6 py-2 rounded-full text-[#38BDF8] flex items-center justify-center gap-2 mx-auto text-[10px] font-black uppercase tracking-widest shadow-sm">
+              <Instagram size={14} /> @{DATA_PENGANTIN.pria.nama.toLowerCase()}
+            </button>
+          </motion.div>
+        </div>
 
-        {/* Simbol Love Penengah - Warna aksen diganti ke Biru Muda */}
-        <div className="my-10 flex justify-center opacity-30">
-          <div className="h-[1px] w-20 bg-[#38BDF8] self-center" />
-          <span className="mx-4 text-2xl text-[#38BDF8]">❦</span>
-          <div className="h-[1px] w-20 bg-[#38BDF8] self-center" />
+        {/* Simbol Love Penengah (Dibuat Lebih Mewah) */}
+        <div className="my-16 flex justify-center items-center gap-4">
+          <div className="h-[2px] w-12 bg-gradient-to-r from-transparent to-[#38BDF8]" />
+          <span className="text-3xl text-[#38BDF8] animate-pulse">❦</span>
+          <div className="h-[2px] w-12 bg-gradient-to-l from-transparent to-[#38BDF8]" />
         </div>
 
         {/* Profil Mempelai Wanita */}
-        <motion.div 
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <h3 className="text-3xl font-serif font-bold text-[#334155] mb-2">
-             {DATA_PENGANTIN.wanita.nama}
-          </h3>
-          <p className="text-xs text-[#64748b] mb-6 uppercase tracking-widest font-bold">
-            Putri ke-8 dari Bapak {DATA_PENGANTIN.wanita.ayah} dan Ibu {DATA_PENGANTIN.wanita.ibu}
-          </p>
+        <div className="relative pb-20">
+          {/* Mawar Dekorasi di Sekitar Foto Wanita */}
+          <motion.img 
+            src={bunga} 
+            animate={{ rotate: [0, -5, 0] }}
+            transition={{ duration: 5, repeat: Infinity }}
+            className="absolute -bottom-10 -left-10 w-56 opacity-80 z-20 pointer-events-none rotate-180" 
+          />
 
-          {/* Bingkai Foto Arch Wanita */}
-          <div className="relative w-56 h-72 mx-auto rounded-t-full border-4 border-white shadow-2xl overflow-hidden mb-4 bg-stone-100">
-             <img 
-               src={womanImage}
-               alt="Mempelai Wanita"
-               className="w-full h-full object-cover grayscale-[10%]"
-             />
-          </div>
-          <button className="text-[#38BDF8] flex items-center justify-center gap-2 mx-auto text-xs font-bold uppercase tracking-wider">
-            <Instagram size={14} /> @{DATA_PENGANTIN.wanita.nama.toLowerCase()}
-          </button>
-        </motion.div>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+          >
+            <h3 className="text-4xl font-serif font-bold text-[#334155] mb-2 drop-shadow-sm italic">
+               {DATA_PENGANTIN.wanita.nama}
+            </h3>
+            <p className="text-[10px] text-[#64748b] mb-8 uppercase tracking-[0.2em] font-black border-y border-[#38BDF8]/20 inline-block py-1">
+              Putri ke-8 dari Bapak {DATA_PENGANTIN.wanita.ayah} & Ibu {DATA_PENGANTIN.wanita.ibu}
+            </p>
+
+            <div className="relative w-64 h-80 mx-auto rounded-t-full border-8 border-white shadow-[0_20px_50px_rgba(0,0,0,0.15)] overflow-hidden mb-6 bg-blue-50">
+               <img src={womanImage} alt="Wanita" className="w-full h-full object-cover brightness-105" />
+            </div>
+            
+            <button className="bg-white/50 backdrop-blur-sm border border-[#38BDF8]/30 px-6 py-2 rounded-full text-[#38BDF8] flex items-center justify-center gap-2 mx-auto text-[10px] font-black uppercase tracking-widest shadow-sm">
+              <Instagram size={14} /> @{DATA_PENGANTIN.wanita.nama.toLowerCase()}
+            </button>
+          </motion.div>
+        </div>
       </div>
     </section>
   );
