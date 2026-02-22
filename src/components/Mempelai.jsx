@@ -11,11 +11,17 @@ const Mempelai = () => {
       <div className="max-w-md mx-auto text-center relative z-10">
         <h3 className="text-2xl md:text-3xl font-serif text-[#334155] mb-16 drop-shadow-sm" dir="rtl">بِسْمِ اللّهِ الرَّحْمَنِ الرَّحِيْمِ</h3>
 
-        {/* Pria */}
+        {/* Mempelai Pria */}
         <div className="relative mb-32 group">
           <motion.img src={bunga} className="absolute -top-12 -right-16 w-48 opacity-70 z-10 pointer-events-none" />
           <motion.div className="relative z-30">
             <h3 className="text-4xl font-serif font-bold text-[#334155] mb-2 italic">{DATA_PENGANTIN.pria.nama}</h3>
+            
+            {/* Keterangan Putra Ke- */}
+            <p className="text-[10px] text-[#64748b] mb-8 uppercase tracking-[0.2em] font-black border-y border-[#38BDF8]/20 inline-block py-1">
+              Putra ke-2 dari Bapak {DATA_PENGANTIN.pria.ayah} & Ibu {DATA_PENGANTIN.pria.ibu}
+            </p>
+
             <div className="relative w-64 h-80 mx-auto rounded-t-full border-8 border-white shadow-2xl overflow-hidden mb-6">
                <img src={manImage} alt="Pria" className="w-full h-full object-cover" />
             </div>
@@ -25,11 +31,17 @@ const Mempelai = () => {
           </motion.div>
         </div>
 
-        {/* Wanita */}
+        {/* Mempelai Wanita */}
         <div className="relative pb-20 group">
           <motion.img src={bunga} className="absolute -bottom-12 -left-20 w-56 opacity-70 z-10 pointer-events-none rotate-180" />
           <motion.div className="relative z-30">
             <h3 className="text-4xl font-serif font-bold text-[#334155] mb-2 italic">{DATA_PENGANTIN.wanita.nama}</h3>
+            
+            {/* Keterangan Putri Ke- */}
+            <p className="text-[10px] text-[#64748b] mb-8 uppercase tracking-[0.2em] font-black border-y border-[#38BDF8]/20 inline-block py-1">
+              Putri ke-8 dari Bapak {DATA_PENGANTIN.wanita.ayah} & Ibu {DATA_PENGANTIN.wanita.ibu}
+            </p>
+
             <div className="relative w-64 h-80 mx-auto rounded-t-full border-8 border-white shadow-2xl overflow-hidden mb-6">
                <img src={womanImage} alt="Wanita" className="w-full h-full object-cover" />
             </div>
