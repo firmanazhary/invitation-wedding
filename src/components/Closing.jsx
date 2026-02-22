@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { DATA_PENGANTIN } from '../constans/content';
 import bunga from '../assets/bunga.png'; // Menggunakan path yang konsisten
-
+import pastedIMage from '../assets/pasted-image.png'; // Gambar ilustrasi pasangan untuk closing
 const Closing = () => {
   return (
     /* Mengubah bg dasar menjadi biru muda cerah (#E0F2FE) agar sinkron */
@@ -38,7 +38,7 @@ const Closing = () => {
           {/* Ilustrasi Pasangan (Arch) - Dengan border biru muda transparan */}
           <div className="relative w-48 h-64 mx-auto rounded-t-full border-4 border-white shadow-2xl overflow-hidden bg-blue-50 my-12">
             <img 
-              src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069&auto=format&fit=crop" 
+              src={pastedIMage}
               alt="Closing Illustration"
               className="w-full h-full object-cover grayscale-[10%] brightness-105"
             />
