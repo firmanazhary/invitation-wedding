@@ -17,7 +17,7 @@ import SaveTheDate from './components/SaveTheDate';
 import nasyid from './assets/nasyid.mpeg';
 import Adab from './components/Adab';
 import LoveStory from './components/LoveStory';
-import TurutMengundang from './components/TurutMengundang';
+
 import Doa from './components/Doa';
 import Closing from './components/Closing';
 import Footer from './components/Footer';
@@ -57,7 +57,7 @@ function AppContent() {
             <Countdown targetDate={DATA_PENGANTIN.acara.tanggal} />
               <LoveStory />
             <SaveTheDate />
-              <TurutMengundang />
+
    {/* Section Guestbook */}
             <section className="max-w-xl mx-auto p-8 pb-20">
                <GuestBook guestName={guestName} />

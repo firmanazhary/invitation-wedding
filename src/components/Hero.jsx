@@ -1,82 +1,115 @@
 import { motion } from 'framer-motion';
 import { Calendar } from 'lucide-react';
 import { DATA_PENGANTIN } from '../constans/content';
-import bunga from '../assets/bunga.png';
+import bunga from '../assets/bunga.png'; // Aset mawar besar
+
+import burung from '../assets/burung.webp';
 
 const Hero = () => {
   return (
-    /* Mengubah bg dasar menjadi biru muda cerah (#E0F2FE) agar sinkron dengan Curtain */
     <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden bg-[#E0F2FE]">
       
-      {/* Background Watercolor Texture dengan nuansa biru lembut */}
-      <div className="absolute inset-0 bg-[#D7E9F7]" />
+      {/* 1. Background Layering */}
+      <div className="absolute inset-0 bg-[#D7E9F7] opacity-50" />
       <div className="absolute inset-0 opacity-20 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/watercolor-paper.png')] mix-blend-multiply" />
       
-      {/* Dekorasi Bunga Kering Pojok Atas - Sedikit diturunkan Opacity-nya agar lebih soft */}
-      <motion.div 
-        animate={{ rotate: [0, 5, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -top-10 -right-10 w-64 h-64 pointer-events-none"
-      >
-        <img 
-          src={bunga}
-          alt="dried flower hero" 
-          className="w-full h-full object-contain rotate-180"
-        />
-      </motion.div>
+      {/* 2. Wayang Transparan (Kiri & Kanan) - Biar lebih rame & sakral */}
 
-      {/* Content */}
-      <div className="z-10 text-center px-6">
+
+      {/* 3. Burung Terbang Melintas */}
+      <div className="absolute inset-0 pointer-events-none z-10">
+        {[...Array(3)].map((_, i) => (
+          <motion.img
+            key={i}
+            src={burung}
+            initial={{ x: "-20%", y: `${15 + i * 25}%`, opacity: 0 }}
+            animate={{ x: "120%", opacity: [0, 0.5, 0] }}
+            transition={{ duration: 15 + i * 3, repeat: Infinity, delay: i * 5, ease: "linear" }}
+            className="absolute w-24 opacity-40 grayscale brightness-150"
+          />
+        ))}
+      </div>
+
+      {/* 4. Ornamen Bunga Mawar Besar di 4 Sudut - Efek Bingkai Mewah */}
+      <motion.img
+        src={bunga}
+        animate={{ rotate: [0, 2, 0], scale: [1, 1.02, 1] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -top-16 -left-16 w-[300px] md:w-[450px] z-20 pointer-events-none"
+      />
+      <motion.img
+        src={bunga}
+        animate={{ rotate: [0, -2, 0], scale: [1, 1.02, 1] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -top-16 -right-16 w-[300px] md:w-[450px] z-20 scale-x-[-1] pointer-events-none"
+      />
+      <motion.img
+        src={bunga}
+        className="absolute -bottom-16 -left-16 w-[300px] md:w-[450px] z-20 rotate-180 scale-x-[-1] pointer-events-none"
+      />
+      <motion.img
+        src={bunga}
+        className="absolute -bottom-16 -right-16 w-[300px] md:w-[450px] z-20 rotate-180 pointer-events-none"
+      />
+
+      {/* 5. Main Content */}
+      <div className="z-30 text-center px-6">
         <motion.p 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          /* Mengganti text-amber-800 menjadi text-blue-600 */
-          className="text-blue-600 tracking-[0.4em] uppercase text-xs mb-6 font-sans font-bold"
+          initial={{ opacity: 0, letterSpacing: "0.1em" }}
+          whileInView={{ opacity: 1, letterSpacing: "0.4em" }}
+          className="text-blue-600 uppercase text-[10px] md:text-xs mb-8 font-sans font-bold"
         >
           Walimatul Ursy
         </motion.p>
         
         <motion.h1 
-          initial={{ scale: 0.9, opacity: 0 }}
+          initial={{ scale: 0.8, opacity: 0 }}
           whileInView={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1 }}
-          /* Mengganti warna teks ke Slate gelap (#334155) dan ampersand ke Biru */
-          className="text-5xl md:text-8xl font-serif font-bold text-[#334155] mb-6"
+          transition={{ duration: 1.2 }}
+          className="text-5xl md:text-8xl font-serif font-bold text-[#334155] mb-8 drop-shadow-sm"
         >
-          {DATA_PENGANTIN.pria.nama} <br /> <span className="text-blue-500"> & </span><br /> {DATA_PENGANTIN.wanita.nama}
+          {DATA_PENGANTIN.pria.nama} <br /> 
+          <span className="text-blue-500 italic text-4xl md:text-6xl my-4 block">&</span>
+          {DATA_PENGANTIN.wanita.nama}
         </motion.h1>
 
         <motion.div 
           initial={{ y: 20, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="space-y-4"
+          transition={{ delay: 0.8 }}
+          className="space-y-6"
         >
-          <p className="text-xl md:text-2xl text-[#64748b] font-serif italic">
-            Sabtu, 12 September 2026
-          </p>
+          <div className="inline-block border-y border-blue-200 py-2 px-6">
+            <p className="text-xl md:text-2xl text-[#64748b] font-serif italic">
+              Sabtu, 12 September 2026
+            </p>
+          </div>
           
-          {/* Tombol disesuaikan dengan warna aksen biru muda dari Curtain */}
-          <button className="bg-white/80 backdrop-blur-sm border border-blue-200 px-8 py-3 rounded-full text-blue-600 text-sm font-bold shadow-sm flex items-center gap-2 mx-auto hover:bg-white transition-all">
+          <motion.button 
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="bg-[#38BDF8] text-white px-10 py-3 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg shadow-blue-200 flex items-center gap-2 mx-auto transition-all"
+          >
             <Calendar size={16} /> Save the date
-          </button>
+          </motion.button>
         </motion.div>
       </div>
 
-      {/* Dekorasi Bunga Kering Pojok Bawah */}
-      <motion.div 
-      animate={{ rotate: [0, 5, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -bottom-10 -left-10 w-72 h-72 pointer-events-none"
-      >
-        <img src={bunga}
-          alt="dried flower hero bottom" 
-          className="w-full h-full object-contain"
-        />
-      </motion.div>
+      {/* Efek Partikel Salju Putih (Biar makin rame & elegan) */}
+      <div className="absolute inset-0 pointer-events-none z-10">
+        {[...Array(15)].map((_, i) => (
+          <motion.span
+            key={i}
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: [0, 0.5, 0], y: [0, 200, 400] }}
+            transition={{ duration: 10 + Math.random() * 10, repeat: Infinity, delay: Math.random() * 5 }}
+            className="absolute w-[4px] h-[4px] rounded-full bg-white shadow-[0_0_10px_white]"
+            style={{ left: `${Math.random() * 100}%`, top: `-5%` }}
+          />
+        ))}
+      </div>
 
-      {/* Ornamen Gradasi Biru untuk Kedalaman */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-blue-100/50 to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-blue-100/60 to-transparent z-20 pointer-events-none" />
     </section>
   );
 };
