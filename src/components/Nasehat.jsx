@@ -16,7 +16,7 @@ const Nasehat = () => {
         transition={{ duration: 6, repeat: Infinity }}
         className="absolute -top-16 -right-16 w-64 opacity-70 z-0 pointer-events-none"
       />
-      />
+      
       <motion.img 
         src={bunga} 
         animate={{ rotate: [0, -5, 0] }}
