@@ -1,105 +1,99 @@
-import { motion as Motion } from "framer-motion";
-import BungaFull from "../assets/bunga.png"; 
-import burung from "../assets/burung.webp"; 
-import mainImage from "../assets/pasted-image.png";
+import { motion, AnimatePresence } from 'framer-motion';
+import { Mail } from 'lucide-react';
+import bunga from '../assets/bunga.png'; 
+import coupleImg from '../assets/pasted-image.png';
 
-const Curtain = ({ guestName, onOpen }) => {
+const Curtain = ({ isOpen, onOpen, guestName }) => {
+  // Animasi goyang bunga yang lebih halus sesuai permintaan
+  const flowerAnim = {
+    animate: { 
+      scale: [1, 1.05, 1],
+      rotate: [0, 3, -3, 0],
+    },
+    transition: {
+      duration: 8,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  };
+
   return (
-    <Motion.div 
-      exit={{ y: "-100%" }}
-      transition={{ duration: 1.5, ease: [0.45, 0, 0.55, 1] }}
-      className="fixed inset-0 z-[120] bg-[#BAE6FD] flex flex-col items-center justify-center text-center overflow-hidden"
-    >
-      {/* 1. Background Layering */}
-      <div className="absolute inset-0 z-0 opacity-20">
-        <img src={mainImage} className="w-full h-full object-cover grayscale" alt="bg" />
-      </div>
-      <div className="absolute inset-0 opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/watercolor-paper.png')] mix-blend-multiply" />
-
-      {/* 2. Ornamen Burung Terbang (Posisi diatur agar tidak menumpuk teks) */}
-      <div className="absolute inset-0 pointer-events-none z-10">
-        {[...Array(4)].map((_, i) => (
-          <Motion.img
-            key={i}
-            src={burung}
-            /* Mengatur rentang y agar burung terbang di area atas dan bawah teks */
-            initial={{ x: "-30%", y: i % 2 === 0 ? "15%" : "75%", opacity: 0, scale: 0.6 }}
-            animate={{ 
-              x: "130%", 
-              opacity: [0, 0.8, 0], // Opacity dinaikkan agar lebih kelihatan
-              scale: [0.6, 0.8, 0.6] 
-            }}
-            transition={{ 
-              duration: 15 + i * 3, 
-              repeat: Infinity, 
-              delay: i * 4,
-              ease: "linear" 
-            }}
-            /* Filter dikurangi agar warna hitam burung lebih kontras di bg biru */
-            className="absolute w-24 md:w-36 opacity-60 brightness-90 grayscale-[50%]"
-          />
-        ))}
-      </div>
-
-      {/* 3. Ornamen Bunga Mawar Besar di 4 Sudut */}
-      <Motion.img
-        src={BungaFull}
-        initial={{ y: -50, opacity: 0 }}
-        whileInView={{ y: 0, opacity: 1 }}
-        className="absolute -top-12 -left-12 w-[280px] md:w-[400px] z-40 pointer-events-none"
-      />
-      <Motion.img
-        src={BungaFull}
-        initial={{ y: -50, opacity: 0 }}
-        whileInView={{ y: 0, opacity: 1 }}
-        className="absolute -top-12 -right-12 w-[280px] md:w-[400px] z-40 scale-x-[-1] pointer-events-none"
-      />
-      <Motion.img
-        src={BungaFull}
-        initial={{ y: 50, opacity: 0 }}
-        whileInView={{ y: 0, opacity: 1 }}
-        className="absolute -bottom-12 -left-12 w-[280px] md:w-[400px] z-40 rotate-180 scale-x-[-1] pointer-events-none"
-      />
-      <Motion.img
-        src={BungaFull}
-        initial={{ y: 50, opacity: 0 }}
-        whileInView={{ y: 0, opacity: 1 }}
-        className="absolute -bottom-12 -right-12 w-[280px] md:w-[400px] z-40 rotate-180 pointer-events-none"
-      />
-
-      {/* 4. Konten Teks Utama (Z-index tertinggi agar tidak tertutup apa pun) */}
-      <div className="relative z-50 px-6 py-10 bg-white/10 backdrop-blur-[2px] rounded-3xl">
-        <Motion.h2 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-4xl md:text-7xl font-serif text-[#1E293B] uppercase mb-4 tracking-[0.2em] drop-shadow-sm"
+    <AnimatePresence>
+      {!isOpen && (
+        <motion.div
+          initial={{ opacity: 1 }}
+          exit={{ y: '-100%', opacity: 0 }}
+          transition={{ duration: 1.2, ease: [0.45, 0, 0.55, 1] }}
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#F0F9FF] overflow-hidden"
         >
-          Undangan <br /> Pernikahan
-        </Motion.h2>
-        
-        <div className="space-y-1 mb-8">
-          <p className="text-[#475569] font-sans text-sm tracking-widest uppercase font-bold">Kepada Bapak/Ibu/Saudara/i:</p>
-          <h2 className="text-2xl md:text-4xl font-serif font-bold text-[#0F172A] italic border-b-2 border-[#38BDF8]/30 pb-2 inline-block">
-            {guestName || "Tamu Undangan"}
-          </h2>
-        </div>
+          {/* 1. Background Image - Opacity & Blur sesuai gambar */}
+          <div className="absolute inset-0 z-0">
+            <img 
+              src={coupleImg} 
+              alt="Couple Backdrop"
+              className="w-full h-full object-cover opacity-40 blur-[3px] scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-[#F0F9FF]/80" />
+          </div>
 
-        <Motion.p 
-          className="font-serif italic text-3xl md:text-5xl text-[#334155] mb-12"
-        >
-          Bagus & Ayu
-        </Motion.p>
+          {/* 2. Dekorasi Bunga Sudut - Ukuran Lebih Proporsional */}
+          <motion.img {...flowerAnim} src={bunga} className="absolute -top-12 -left-12 w-44 md:w-64 opacity-80 z-10 pointer-events-none" />
+          <motion.img {...flowerAnim} src={bunga} className="absolute -top-12 -right-12 w-44 md:w-64 opacity-80 z-10 pointer-events-none scale-x-[-1]" />
+          <motion.img {...flowerAnim} src={bunga} className="absolute -bottom-12 -left-12 w-44 md:w-64 opacity-80 z-10 pointer-events-none -rotate-12" />
+          <motion.img {...flowerAnim} src={bunga} className="absolute -bottom-12 -right-12 w-44 md:w-64 opacity-80 z-10 pointer-events-none rotate-12 scale-x-[-1]" />
 
-        <Motion.button
-          onClick={onOpen}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="px-12 py-3 bg-[#38BDF8] hover:bg-[#0EA5E9] text-white rounded-full shadow-xl shadow-blue-200 text-xs font-bold uppercase tracking-[0.2em] transition-all border border-white/50"
-        >
-          Buka Undangan
-        </Motion.button>
-      </div>
-    </Motion.div>
+          {/* 3. Main Content Section */}
+          <div className="relative z-30 text-center px-6 max-w-lg w-full flex flex-col items-center">
+            {/* Header Text - Sesuai Gambar */}
+            <p className="text-[12px] uppercase tracking-[0.4em] text-[#475569] font-bold mb-10">
+              Undangan Pernikahan
+            </p>
+
+            {/* Nama Tamu - Ukuran & Border Sesuai Gambar */}
+            <div className="space-y-4 mb-10">
+              <p className="text-[10px] text-[#64748b] uppercase tracking-[0.2em]">Kepada Bapak/Ibu/Saudara/i:</p>
+              <h2 className="text-4xl font-serif italic font-bold text-[#1E293B] border-b-2 border-[#38BDF8]/30 pb-2 inline-block px-4">
+                {guestName || "Tamu Undangan"}
+              </h2>
+            </div>
+
+            {/* Nama Mempelai - Ukuran Pas */}
+            <div className="mb-14">
+              <h1 className="text-5xl md:text-6xl font-serif italic text-[#334155] leading-snug tracking-tight">
+                Bagus <span className="text-[#38BDF8]">&</span> Ayu
+              </h1>
+            </div>
+
+            {/* 4. Resized Button - Ukuran Kecil & Elegant */}
+            <div className="relative">
+              {/* Glow Effect Biru Terfokus */}
+              <div className="absolute inset-0 bg-[#38BDF8]/20 blur-2xl rounded-full scale-90 -z-10 animate-pulse" />
+              
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={onOpen}
+                className="flex items-center gap-3 bg-gradient-to-r from-[#5BB4C4]/90 to-[#4A9AA8]/90 backdrop-blur-md px-8 py-3 rounded-full border border-white/40 shadow-xl text-white"
+              >
+                <div className="bg-white/20 p-1.5 rounded-full border border-white/30">
+                  <Mail size={16} className="text-white" />
+                </div>
+                <span className="text-[10px] font-black uppercase tracking-[0.3em]">
+                  Buka Undangan
+                </span>
+              </motion.button>
+            </div>
+          </div>
+
+          {/* Copyright Branding */}
+          <div className="absolute bottom-8 left-0 w-full text-center z-30">
+            <p className="text-[8px] text-[#94a3b8] uppercase tracking-[0.4em] font-medium">
+              Created by firmanazhary
+            </p>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 
