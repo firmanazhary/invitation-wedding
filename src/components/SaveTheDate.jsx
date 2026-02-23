@@ -12,7 +12,7 @@ const SaveTheDate = () => {
       {/* 1. Header Image dengan Overlay yang Lebih Smooth */}
       <div className="relative w-full h-[45vh] overflow-hidden">
         <img 
-          src="https://images.unsplash.com/photo-1597953601374-1ff2d5640c85?w=600&auto=format&fit=crop" 
+          src="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YWxhbXxlbnwwfHwwfHx8MA%3D%3D" 
           className="w-full h-full object-cover brightness-90 scale-105" 
           alt="Wedding Decor" 
         />
