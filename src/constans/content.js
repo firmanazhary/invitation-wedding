@@ -12,7 +12,7 @@ export const DATA_PENGANTIN = {
     keluarga: "Keluarga Besar Bpk. Umar"
   },
   acara: {
-    tanggal: "2026-03-12T09:00:00", // Format ISO untuk Countdown
+    tanggal: "2026-03-29T09:00:00", // Format ISO untuk Countdown
     lokasi: "Masjid Raya Al-Mashun, Medan",
     maps: "https://maps.google.com/...",
   },

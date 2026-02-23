@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import { Calendar } from 'lucide-react';
 import { DATA_PENGANTIN } from '../constans/content';
 import bunga from '../assets/bunga.png'; 
-import burung from '../assets/burung.webp';
 
 const Hero = () => {
   const flowerFloating = (delay = 0) => ({
@@ -66,7 +65,7 @@ const Hero = () => {
           <div className="relative inline-block py-2">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-[2px] bg-[#38BDF8]/40" />
             <p className="text-lg md:text-3xl text-[#64748b] font-serif italic tracking-widest uppercase">
-              12 September 2026
+              29 Maret 2026
             </p>
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-[2px] bg-[#38BDF8]/40" />
           </div>
