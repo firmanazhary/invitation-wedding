@@ -87,6 +87,14 @@ const SaveTheDate = () => {
           >
             <Calendar size={18} /> Save to Calendar
           </motion.button>
+          <a 
+          href="https://maps.google.com/?q=4RGC%2B796+Aek+Paing" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="text-[#38BDF8] text-[10px] font-black uppercase tracking-[0.3em] hover:underline transition-all"
+        >
+          Petunjuk Jalan (GPS)
+        </a>
         </div>
       </motion.div>
     </section>
