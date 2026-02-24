@@ -65,7 +65,7 @@ const Hero = () => {
           <div className="relative inline-block py-2">
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-[2px] bg-[#38BDF8]/40" />
             <p className="text-lg md:text-3xl text-[#64748b] font-serif italic tracking-widest uppercase">
-              29 Maret 2026
+            Ahad 29 Maret 2026
             </p>
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-[2px] bg-[#38BDF8]/40" />
           </div>
