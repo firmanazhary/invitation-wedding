@@ -1,10 +1,11 @@
 import { motion } from 'framer-motion';
 import { Calendar, MapPin, Heart, Home, Navigation } from 'lucide-react';
 import bunga from '../assets/bunga.png';
+import { DATA_PENGANTIN } from '../constans/content';
 
 const SaveTheDate = () => {
-  const mapUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.721473456789!2d99.82715!3d2.09135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMsKwMDUnMjguOSJOIDk5wrA0OSczNy43IkU!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid";
-  const googleMapsLink = "https://maps.google.com/?q=4RGC%2B796+Aek+Paing";
+  const mapUrl = DATA_PENGANTIN.acara.embedMaps;
+  const googleMapsLink = DATA_PENGANTIN.acara.mapsUrl;
   
   const CardEvent = ({ title, icon: Icon, day, date, month, time, location, delay }) => (
     <motion.div 
@@ -15,12 +16,14 @@ const SaveTheDate = () => {
     >
       <div className="bg-white/60 backdrop-blur-sm rounded-[3rem] p-8 border border-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-blue-100/50 transition-all duration-500">
         <div className="flex flex-col items-center">
+          {/* Icon Section */}
           <div className="bg-blue-500/10 p-4 rounded-2xl mb-6 group-hover:scale-110 transition-transform">
             <Icon size={24} className="text-[#38BDF8]" />
           </div>
           
           <h4 className="text-xl font-serif font-black text-[#1E293B] uppercase tracking-widest mb-6">{title}</h4>
           
+          {/* Vertical Date Divider Style */}
           <div className="flex items-center justify-center gap-8 mb-6">
             <p className="text-[10px] uppercase tracking-[0.4em] text-[#64748b] font-bold text-right flex-1">{day}</p>
             <div className="h-12 w-[1.5px] bg-gradient-to-b from-transparent via-blue-200 to-transparent" />
@@ -42,9 +45,7 @@ const SaveTheDate = () => {
   return (
     <section id='save-the-date' className="relative min-h-screen bg-[#F0F9FF] overflow-hidden -mt-12 z-40 rounded-t-[5rem] shadow-[0_-30px_60px_rgba(0,0,0,0.05)] pb-24">
       
-      {/* 1. Dynamic Background */}
-      <div className="absolute inset-0 opacity-40 bg-[url('https://www.transparenttextures.com/patterns/pinstriped-suit.png')]" />
-      
+      {/* 1. Header Image with Zoom Animation */}
       <div className="relative w-full h-[35vh] overflow-hidden">
         <motion.img 
           initial={{ scale: 1.2 }}
@@ -52,11 +53,12 @@ const SaveTheDate = () => {
           transition={{ duration: 2 }}
           src="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=1200" 
           className="w-full h-full object-cover" 
+          alt="Wedding Backdrop"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-blue-400/30 via-transparent to-[#F0F9FF]" />
       </div>
 
-      {/* 2. Floating Flowers - More Subtle */}
+      {/* 2. Floating Flowers Animation */}
       <motion.img 
         src={bunga} 
         animate={{ y: [0, 15, 0], rotate: [0, 3, 0] }} 
@@ -70,7 +72,7 @@ const SaveTheDate = () => {
         className="absolute top-[45%] -right-40 w-[400px] opacity-40 z-20 pointer-events-none scale-x-[-1]" 
       />
 
-      {/* 3. The Grand Arch Card */}
+      {/* 3. The Grand Arch Card Container */}
       <motion.div 
         initial={{ y: 80, opacity: 0 }} 
         whileInView={{ y: 0, opacity: 1 }} 
@@ -81,8 +83,26 @@ const SaveTheDate = () => {
           <h3 className="text-5xl font-serif italic text-[#1E293B]">Save The Date</h3>
         </div>
 
-        <CardEvent title="Akad Nikah" icon={Heart} day="Selasa" date="24" month="Februari" time="08:00 WIB" location="Rumah Mempelai Wanita" delay={0.2} />
-        <CardEvent title="Walimah" icon={Home} day="Selasa" date="24" month="Februari" time="10:00 WIB" location="Rumah Mempelai Wanita" delay={0.4} />
+        {/* Dynamic Cards using DATA_PENGANTIN */}
+        <CardEvent 
+          title="Akad Nikah" icon={Heart} 
+          day={DATA_PENGANTIN.acara.hari} 
+          date={DATA_PENGANTIN.acara.tanggal} 
+          month={DATA_PENGANTIN.acara.bulan} 
+          time={DATA_PENGANTIN.acara.waktuAkad} 
+          location={DATA_PENGANTIN.acara.lokasiAcara} 
+          delay={0.2} 
+        />
+        
+        <CardEvent 
+          title="Walimah" icon={Home} 
+          day={DATA_PENGANTIN.acara.hari} 
+          date={DATA_PENGANTIN.acara.tanggal} 
+          month={DATA_PENGANTIN.acara.bulan} 
+          time={DATA_PENGANTIN.acara.waktuWalimah} 
+          location={DATA_PENGANTIN.acara.lokasiAcara} 
+          delay={0.4} 
+        />
 
         {/* 4. Maps Modern Card */}
         <motion.div 
@@ -91,7 +111,12 @@ const SaveTheDate = () => {
           className="mt-12 space-y-10"
         >
           <div className="group relative w-full aspect-[4/5] rounded-[4rem] overflow-hidden shadow-2xl border-[12px] border-white/50 bg-white">
-            <iframe src={mapUrl} width="100%" height="100%" style={{ border: 0 }} allowFullScreen="" loading="lazy" className="grayscale-[30%] group-hover:grayscale-0 transition-all duration-1000" />
+            <iframe 
+              src={mapUrl} 
+              width="100%" height="100%" style={{ border: 0 }} 
+              allowFullScreen="" loading="lazy" 
+              className="grayscale-[30%] group-hover:grayscale-0 transition-all duration-1000" 
+            />
             <div className="absolute top-6 right-6">
                <div className="bg-white/90 backdrop-blur-md p-3 rounded-2xl shadow-lg">
                   <Navigation size={20} className="text-[#38BDF8] animate-bounce" />
@@ -100,15 +125,18 @@ const SaveTheDate = () => {
           </div>
 
           <div className="space-y-4">
-            <h4 className="text-xs font-black uppercase tracking-[0.5em] text-[#0369A1]">Aek Paing, Labuhan Batu</h4>
+            <h4 className="text-xs font-black uppercase tracking-[0.5em] text-[#0369A1]">
+               {DATA_PENGANTIN.acara.alamatLengkap}
+            </h4>
             <p className="text-[10px] text-[#64748b] leading-relaxed font-bold uppercase tracking-widest opacity-60">
               Sumatera Utara, Indonesia
             </p>
           </div>
 
+          {/* Action Buttons */}
           <div className="flex flex-col gap-5 pt-6 max-w-[280px] mx-auto">
             <motion.a 
-              href={googleMapsLink} target="_blank"
+              href={googleMapsLink} target="_blank" rel="noopener noreferrer"
               whileHover={{ y: -5 }} whileTap={{ scale: 0.95 }}
               className="bg-gradient-to-r from-[#38BDF8] to-[#0284C7] text-white py-5 rounded-3xl text-[10px] font-black uppercase tracking-[0.3em] shadow-[0_20px_40px_rgba(56,189,248,0.3)] flex justify-center items-center gap-3"
             >
@@ -117,18 +145,18 @@ const SaveTheDate = () => {
             
             <motion.button 
               whileTap={{ scale: 0.95 }}
-              className="border border-blue-100 bg-white/50 text-[#38BDF8] py-4 rounded-3xl text-[9px] font-black uppercase tracking-[0.3em] hover:bg-white transition-all shadow-sm"
+              className="border border-blue-100 bg-white/50 text-[#38BDF8] py-4 rounded-3xl text-[9px] font-black uppercase tracking-[0.3em] hover:bg-white transition-all shadow-sm flex items-center justify-center gap-2"
             >
-              <Calendar size={14} className="inline mr-2" /> Save Event
+              <Calendar size={14} /> Save Event
             </motion.button>
           </div>
         </motion.div>
       </motion.div>
 
-      {/* Branding Minimalis */}
-      <div className="text-center mt-12">
-        <p className="text-[8px] text-blue-900/20 uppercase tracking-[0.8em] font-black">
-          © 2026 firmanazhary
+      {/* Subtle Copyright */}
+      <div className="text-center mt-12 opacity-20">
+        <p className="text-[8px] text-blue-900 uppercase tracking-[0.8em] font-black">
+          © 2026 Crafted by firmanazhary
         </p>
       </div>
     </section>

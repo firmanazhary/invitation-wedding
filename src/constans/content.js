@@ -12,16 +12,25 @@ export const DATA_PENGANTIN = {
     keluarga: "Keluarga Besar Bpk. Umar"
   },
   acara: {
-    tanggal: "2026-03-29T09:00:00", // Format ISO untuk Countdown
-    lokasi: "Masjid Raya Al-Mashun, Medan",
-    maps: "https://maps.google.com/...",
+    // Format ISO untuk Countdown (Ahad, 29 Maret 2026)
+    tanggalISO: "2026-03-29T09:00:00", 
+    
+    // Data Teks untuk UI Save The Date
+    hari: "Ahad", 
+    tanggal: "29", // Saya sesuaikan dengan Maret agar sinkron dengan ISO
+    bulan: "Maret",
+    tahun: "2026",
+    
+    waktuAkad: "08.00 WIB - Selesai",
+    waktuWalimah: "10.00 WIB - Selesai",
+    
+    lokasiAcara: "Rumah Mempelai Wanita",
+    alamatLengkap: "Aek Paing, Rantau Utara, Labuhan Batu",
+    mapsUrl: "https://maps.google.com/...",
+    embedMaps: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.721473456789!2d99.82715!3d2.09135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMsKwMDUnMjguOSJOIDk5wrA0OSczNy43IkU!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" // URL untuk iframe
   },
-  cerita: [
-    { tahun: "2024", judul: "Awal Pertemuan", isi: "Pertemuan pertama yang tak terduga..." },
-    { tahun: "2025", judul: "Khitbah", isi: "Langkah serius untuk menyatukan dua keluarga..." },
-    { tahun: "2026", judul: "Akad Nikah", isi: "Janji suci di hadapan Allah SWT." }
-  ],
-  dalil: "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya...",
+
+  dalil: "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berfikir.",
   loveStory: [
     {
       judul: "Awal Taaruf",
@@ -44,5 +53,4 @@ export const DATA_PENGANTIN = {
       deskripsi: "Insya Allah, dua nama akan disatukan dalam ikatan suci pernikahan. Semoga menjadi awal kehidupan kami yang penuh berkah."
     }
   ]
-
 };

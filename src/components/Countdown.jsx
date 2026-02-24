@@ -10,12 +10,9 @@ const CountdownSection = () => {
   const [isExpired, setIsExpired] = useState(false);
 
   useEffect(() => {
-    const target = new Date(DATA_PENGANTIN.acara.tanggal);
-
+    const target = new Date(DATA_PENGANTIN.acara.tanggalISO);
     const timer = setInterval(() => {
       const now = new Date();
-      
-      // Cek apakah waktu sekarang sudah melewati tanggal acara
       if (isAfter(now, target)) {
         setIsExpired(true);
         clearInterval(timer);
@@ -28,7 +25,6 @@ const CountdownSection = () => {
         });
       }
     }, 1000);
-
     return () => clearInterval(timer);
   }, []);
 
@@ -49,45 +45,38 @@ const CountdownSection = () => {
           {isExpired ? "Barakallahu Lakum" : "Menuju Hari Bahagia"}
         </h3>
         
-        <AnimatePresence mode="wait">
-          {!isExpired ? (
-            // TAMPILAN COUNTDOWN (Sama seperti sebelumnya)
-            <motion.div 
-              key="countdown"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="grid grid-cols-4 gap-2 md:gap-4 mb-14"
-            >
-              {Object.entries(timeLeft).map(([label, value]) => (
-                <div key={label} className="bg-white/80 backdrop-blur-xl rounded-[1.5rem] py-5 px-2 shadow-xl border border-white/60">
-                  <div className="text-3xl font-serif font-black text-[#0EA5E9] mb-1">
+        <div className="grid grid-cols-4 gap-2 md:gap-4 mb-14">
+          {Object.entries(timeLeft).map(([label, value]) => (
+            <div key={label} className="bg-white/80 backdrop-blur-xl rounded-[1.5rem] py-5 px-1 shadow-xl border border-white/60 overflow-hidden">
+              {/* INTERAKTIF: Animasi angka berganti */}
+              <div className="relative h-10 overflow-hidden">
+                <AnimatePresence mode="popLayout">
+                  <motion.div
+                    key={value}
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -20, opacity: 0 }}
+                    transition={{ duration: 0.4 }}
+                    className="text-3xl font-serif font-black text-[#0EA5E9] absolute inset-0"
+                  >
                     {String(value).padStart(2, '0')}
-                  </div>
-                  <div className="text-[8px] uppercase tracking-[0.3em] text-[#64748b] font-black">{label}</div>
-                </div>
-              ))}
-            </motion.div>
-          ) : (
-            // TAMPILAN KETIKA SUDAH SELESAI
-            <motion.div 
-              key="expired"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="mb-14 p-8 bg-white/40 backdrop-blur-md rounded-[2rem] border border-white/60 shadow-inner"
-            >
-              <p className="text-[#0369A1] font-serif italic text-2xl mb-2">Acara Telah Selesai</p>
-              <p className="text-[10px] uppercase tracking-[0.2em] text-[#64748b] font-bold">
-                Terima kasih atas doa & restu Anda
-              </p>
-            </motion.div>
-          )}
-        </AnimatePresence>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+              <div className="text-[8px] uppercase tracking-[0.3em] text-[#64748b] font-black mt-2">{label}</div>
+            </div>
+          ))}
+        </div>
 
+        {/* TIPOGRAFI: Dalil tidak lagi uppercase agar lebih nyaman dibaca */}
         <div className="space-y-6 px-4">
-          <p className="text-[12px] leading-relaxed italic font-medium text-[#334155] opacity-90 uppercase tracking-widest">
-            "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri..."
-          </p>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="text-[13px] leading-relaxed italic font-medium text-[#334155] opacity-90 first-letter:text-2xl first-letter:font-serif"
+          >
+            "{DATA_PENGANTIN.dalil}"
+          </motion.p>
           <p className="text-[10px] font-black text-[#0EA5E9] uppercase tracking-[0.4em]">
             (QS. Ar-Rum: 21)
           </p>
