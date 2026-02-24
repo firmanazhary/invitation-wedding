@@ -21,8 +21,8 @@ export const DATA_PENGANTIN = {
     bulan: "Maret",
     tahun: "2026",
     
-    waktuAkad: "08.00 WIB - Selesai",
-    waktuWalimah: "10.00 WIB - Selesai",
+    waktuAkad: "10.00 WIB - Selesai",
+    waktuWalimah: "11.00 WIB - Selesai",s
     
     lokasiAcara: "Rumah Mempelai Wanita",
     alamatLengkap: "Aek Paing, Rantau Utara, Labuhan Batu",
