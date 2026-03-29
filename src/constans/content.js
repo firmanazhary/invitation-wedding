@@ -27,7 +27,7 @@ export const DATA_PENGANTIN = {
     lokasiAcara: "Rumah Mempelai Wanita",
     alamatLengkap: "Aek Paing, Rantau Utara, Labuhan Batu",
     mapsUrl: "https://maps.google.com/...",
-    embedMaps: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3986.721473456789!2d99.82715!3d2.09135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMsKwMDUnMjguOSJOIDk5wrA0OSczNy43IkU!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid" // URL untuk iframe
+    embedMaps: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3987.0730109628416!2d99.8182991749676!3d2.1256003978554334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMsKwMDcnMzIuMiJOIDk5wrA0OScxNS4yIkU!5e0!3m2!1sen!2sid!4v1774753172754!5m2!1sen!2sid" // URL untuk iframe
   },
 
   dalil: "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berfikir.",
