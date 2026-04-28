@@ -295,11 +295,11 @@ const SaveTheDate = () => {
                 delay={0.2}
               />
               <CardEvent
-                title="Walimatul Ursy" icon={Home}
+                title="Resepsi" icon={Home}
                 day={DATA_PENGANTIN.acara.hari}
                 date={DATA_PENGANTIN.acara.tanggal}
                 month={DATA_PENGANTIN.acara.bulan}
-                time={DATA_PENGANTIN.acara.waktuWalimah}
+                time={DATA_PENGANTIN.acara.waktuResepsi}
                 location={DATA_PENGANTIN.acara.lokasiAcara}
                 delay={0.4}
               />

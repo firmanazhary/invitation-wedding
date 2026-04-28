@@ -6,7 +6,6 @@ const NAV_ITEMS = [
   { icon: Home,          label: 'Home',     target: 'hero'          },
   { icon: Heart,         label: 'Mempelai', target: 'mempelai'      },
   { icon: Calendar,      label: 'Acara',    target: 'save-the-date' },
-  { icon: BookOpen,      label: 'Nasihat',  target: 'nasehat'       },
   { icon: MessageCircle, label: 'Ucapan',   target: 'guestbook'     },
 ];
 
