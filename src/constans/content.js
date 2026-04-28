@@ -28,27 +28,31 @@ export const DATA_PENGANTIN = {
   },
   // Ganti Dalil dengan Wedding Quote Universal
   quote: "Dua hati, dua jiwa, satu tujuan untuk melangkah bersama dalam ikatan janji suci pernikahan. Menghabiskan waktu selamanya untuk saling melengkapi dan berbahagia.",
-  
-  loveStory: [
+ loveStory: [
     {
-      judul: "Awal Pertemuan",
+      judul: "The First Meet",
       waktu: "Januari 2025",
-      deskripsi: "Pertama kali diperkenalkan oleh teman kerja. Meski belum banyak berbincang, momen ini menjadi awal takdir kami."
+      deskripsi: "Berawal dari perkenalan singkat melalui teman kerja. Meski belum banyak komunikasi, ternyata takdir sudah mulai menuliskan skenarionya."
     },
     {
-      judul: "Pertemuan Kembali",
+      judul: "Unexpected Trip",
       waktu: "Juli 2025",
-      deskripsi: "Bertemu kembali secara tidak sengaja di acara liburan kantor. Sejak saat itu, komunikasi mulai terjalin lebih dekat."
+      deskripsi: "Takdir mempertemukan kami kembali di acara liburan kantor. Pertemuan tak terencana ini menjadi titik awal komunikasi yang mulai terjalin intens."
     },
     {
-      judul: "Komitmen Bersama",
+      judul: "Serious Commitment",
       waktu: "September 2025",
-      deskripsi: "Kami memutuskan untuk menjalin hubungan yang lebih serius dan berkomitmen untuk masa depan bersama."
+      deskripsi: "Seiring berjalannya waktu, kami memutuskan untuk melangkah ke tahap yang lebih serius. Membangun komitmen dan menyatukan visi untuk masa depan."
     },
     {
-      judul: "Pertemuan Keluarga",
+      judul: "The Engagement",
       waktu: "8 Februari 2026",
-      deskripsi: "Momen berharga saat kedua keluarga bertemu untuk meresmikan niat kami melangkah ke pelaminan."
+      deskripsi: "Di hadapan keluarga besar, janji itu pun terucap. Sebuah momen hangat dan sederhana yang meresmikan niat kami untuk melangkah ke pelaminan."
+    },
+    {
+      judul: "The Wedding Day",
+      waktu: "13 Mei 2026",
+      deskripsi: "Hari di mana dua perjalanan menjadi satu. Kami memulai babak baru dalam ikatan janji yang kami jaga selamanya. Today, we start our forever journey."
     }
   ]
 };
