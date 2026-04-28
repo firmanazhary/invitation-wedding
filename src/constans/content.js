@@ -1,56 +1,52 @@
 export const DATA_PENGANTIN = {
   pria: {
-    nama: "Bagus Herlianto",
-    ibu: "Herlina",
-    ayah: "Suhamto",
-    keluarga: "Keluarga Besar Bpk. Suhamto"
+    nama: "Febriadi Harahap",
+    panggilan: "Febri",
+    ayah: "Sutan Hasayangan Harahap",
+    ibu: "Alm. Masriana Daulay",
+    anakKe: "Putra keenam"
   },
   wanita: {
-    nama: "Ayu Azhari",
-    ibu: "Wakini",
-    ayah: "Warji",
-    keluarga: "Keluarga Besar Bpk. Umar"
+    nama: "Sri Suci Safitri",
+    panggilan: "Suci",
+    ayah: "Edi Sahuri",
+    ibu: "Herawati",
+    anakKe: "Putri pertama"
   },
   acara: {
-    // Format ISO untuk Countdown (Ahad, 29 Maret 2026)
-    tanggalISO: "2026-03-29T09:00:00", 
-    
-    // Data Teks untuk UI Save The Date
-    hari: "Ahad", 
-    tanggal: "29", // Saya sesuaikan dengan Maret agar sinkron dengan ISO
-    bulan: "Maret",
+    tanggalISO: "2026-05-13T08:30:00", 
+    hari: "Rabu", 
+    tanggal: "13",
+    bulan: "Mei",
     tahun: "2026",
-    
-    waktuAkad: "10.00 WIB - Selesai",
-    waktuWalimah: "11.00 WIB - Selesai",
-    
-    lokasiAcara: "Rumah Mempelai Wanita",
-    alamatLengkap: "Aek Paing, Rantau Utara, Labuhan Batu",
-    mapsUrl: "https://maps.google.com/...",
-    embedMaps: "https://www.google.com/maps/embed?pb=!4v1774753651111!6m8!1m7!1sLyBvCGY67fYWf8qi-ixwpg!2m2!1d2.12559511096955!2d99.8206689754615!3f119.24291139240506!4f2.2417088607594877!5f0.4000000000000002" // URL untuk iframe
+    waktuAkad: "08.30 WIB - Selesai", // Bisa diganti "Pemberkatan" atau "Upacara Pernikahan"
+    waktuResepsi: "10.00 WIB - Selesai",
+    lokasiAcara: "Desa Bah Bulian",
+    alamatLengkap: "Desa Bah Bulian, Kec. Raya Kahean, Kab. Simalungun",
   },
-
-  dalil: "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berfikir.",
+  // Ganti Dalil dengan Wedding Quote Universal
+  quote: "Dua hati, dua jiwa, satu tujuan untuk melangkah bersama dalam ikatan janji suci pernikahan. Menghabiskan waktu selamanya untuk saling melengkapi dan berbahagia.",
+  
   loveStory: [
     {
-      judul: "Awal Taaruf",
-      waktu: "Februari 2025",
-      deskripsi: "Kami dipertemukan dalam kebaikan, melalui cara yang diridhai."
+      judul: "Awal Pertemuan",
+      waktu: "Januari 2025",
+      deskripsi: "Pertama kali diperkenalkan oleh teman kerja. Meski belum banyak berbincang, momen ini menjadi awal takdir kami."
     },
     {
-      judul: "Niat yang Ditetapkan",
+      judul: "Pertemuan Kembali",
       waktu: "Juli 2025",
-      deskripsi: "Bismillah, langkah kecil dalam doa menjadi kesepakatan hati untuk melangkah bersama."
+      deskripsi: "Bertemu kembali secara tidak sengaja di acara liburan kantor. Sejak saat itu, komunikasi mulai terjalin lebih dekat."
     },
     {
-      judul: "Khitbah",
-      waktu: "Juli 2025",
-      deskripsi: "Keluarga mempertemukan dua niat baik dalam satu langkah menuju pernikahan."
+      judul: "Komitmen Bersama",
+      waktu: "September 2025",
+      deskripsi: "Kami memutuskan untuk menjalin hubungan yang lebih serius dan berkomitmen untuk masa depan bersama."
     },
     {
-      judul: "Akad Nikah",
-      waktu: "Maret 2026",
-      deskripsi: "Insya Allah, dua nama akan disatukan dalam ikatan suci pernikahan. Semoga menjadi awal kehidupan kami yang penuh berkah."
+      judul: "Pertemuan Keluarga",
+      waktu: "8 Februari 2026",
+      deskripsi: "Momen berharga saat kedua keluarga bertemu untuk meresmikan niat kami melangkah ke pelaminan."
     }
   ]
 };

@@ -4,14 +4,14 @@ import { AnimatePresence } from 'framer-motion';
 
 // Import komponen
 import Curtain from './components/Curtain';
-import Butterfly from './components/Butterfly';
+
 import Countdown from './components/Countdown';
 import GuestBook from './components/GuestBook';
-import FlowerDecoration from './components/FlowerDecoration';
+
 import { DATA_PENGANTIN } from './constans/content';
 import Hero from './components/Hero';
 import Navbar from './components/Navbar';
-import Verse from './components/Verse';
+import Verse from './components/Quote';
 import Mempelai from './components/Mempelai';
 import SaveTheDate from './components/SaveTheDate';
 import Adab from './components/Adab';
@@ -20,9 +20,10 @@ import Doa from './components/Doa';
 import Closing from './components/Closing';
 import Footer from './components/Footer';
 import Nasehat from './components/Nasehat';
-
+import Hadiah from './components/Hadiah';
 // Import MusicPlayer yang baru dibuat
 import MusicPlayer from './components/Nasyid'; 
+import Gallery from './components/Gallery';
 
 function AppContent() {
   const [searchParams] = useSearchParams();
@@ -47,9 +48,8 @@ function AppContent() {
       
       {isOpen && (
         <div className="bg-[#E0F2FE]">
-          <Navbar />
-          <Butterfly />
-          <FlowerDecoration />
+          
+        
           
           <main className="relative z-20">
             <Hero />
@@ -59,14 +59,16 @@ function AppContent() {
             <LoveStory />
             <SaveTheDate />
 
-            <section className="max-w-xl mx-auto py-8">
+            <section className="max-w-xl mx-auto">
                <GuestBook guestName={guestName} />
             </section>
-            
+            <Hadiah />
             <Adab />
             <Nasehat />
             <Doa />
+            <Gallery/>
             <Closing />
+            <Navbar />
             <Footer />
           </main>
         </div>

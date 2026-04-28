@@ -1,96 +1,254 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail } from 'lucide-react';
-import bunga from '../assets/bunga.png'; 
 import coupleImg from '../assets/pasted-image.png';
 
-const Curtain = ({ isOpen, onOpen, guestName }) => {
-  // Animasi goyang bunga yang lebih halus sesuai permintaan
-  const flowerAnim = {
-    animate: { 
-      scale: [1, 1.05, 1],
-      rotate: [0, 3, -3, 0],
-    },
-    transition: {
-      duration: 8,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }
-  };
+// ─── Inline SVG Ornaments ──────────────────────────────────────────────────
 
+/** Motif Gorgat Mandailing — diamond chain horizontal */
+const GorgatDivider = () => (
+  <svg viewBox="0 0 200 20" className="w-40 opacity-70" xmlns="http://www.w3.org/2000/svg">
+    <g fill="#C9983A">
+      {[10, 30, 50, 70, 90, 110, 130, 150, 170, 190].map((cx, i) => (
+        <polygon key={i} points={`${cx},2 ${cx + 8},10 ${cx},18 ${cx - 8},10`} />
+      ))}
+    </g>
+    <line x1="0" y1="10" x2="200" y2="10" stroke="#C9983A" strokeWidth="0.5" opacity="0.4" />
+  </svg>
+);
+
+/** Ukiran sudut – motif pucuk rebung Mandailing */
+const CornerOrnament = ({ className = '' }) => (
+  <svg viewBox="0 0 120 120" className={`w-28 md:w-40 opacity-60 ${className}`}
+       xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 0 Q60 0 60 60 Q60 0 120 0" fill="none" stroke="#C9983A" strokeWidth="1.5"/>
+    <path d="M0 0 Q40 0 40 40 Q40 0 80 0" fill="none" stroke="#8B1A1A" strokeWidth="1" opacity="0.6"/>
+    <path d="M0 20 Q20 20 20 40" fill="none" stroke="#C9983A" strokeWidth="1"/>
+    <circle cx="10" cy="10" r="3" fill="#C9983A" opacity="0.8"/>
+    <circle cx="30" cy="5"  r="2" fill="#C9983A" opacity="0.5"/>
+    <circle cx="5"  cy="30" r="2" fill="#C9983A" opacity="0.5"/>
+    {/* Daun kecil */}
+    <path d="M15 15 Q25 5 35 15 Q25 25 15 15Z" fill="#8B1A1A" opacity="0.4"/>
+    <path d="M5  40 Q15 30 25 40 Q15 50 5  40Z" fill="#8B1A1A" opacity="0.4"/>
+  </svg>
+);
+
+/** Silhouette Gunungan (Pohon Hayat) — centerpiece */
+const GununganMini = () => (
+  <svg viewBox="0 0 100 140" className="w-14 opacity-80" xmlns="http://www.w3.org/2000/svg">
+    {/* Outer frame */}
+    <path d="M50 8 L92 128 L8 128 Z" fill="none" stroke="#C9983A" strokeWidth="1.5"/>
+    {/* Inner second frame */}
+    <path d="M50 18 L85 124 L15 124 Z" fill="none" stroke="#8B1A1A" strokeWidth="0.8" opacity="0.5"/>
+    {/* Trunk */}
+    <rect x="46" y="100" width="8" height="24" fill="#8B1A1A" rx="1"/>
+    {/* Branches */}
+    <path d="M50 100 Q38 85 28 72 Q42 80 50 94" fill="#5A3E1B" opacity="0.7"/>
+    <path d="M50 100 Q62 85 72 72 Q58 80 50 94" fill="#5A3E1B" opacity="0.7"/>
+    <path d="M50 82 Q34 65 22 52 Q38 64 50 78" fill="#5A3E1B" opacity="0.7"/>
+    <path d="M50 82 Q66 65 78 52 Q62 64 50 78" fill="#5A3E1B" opacity="0.7"/>
+    <path d="M50 62 Q38 44 32 30 Q44 46 50 58" fill="#5A3E1B" opacity="0.7"/>
+    <path d="M50 62 Q62 44 68 30 Q56 46 50 58" fill="#5A3E1B" opacity="0.7"/>
+    {/* Crown */}
+    <circle cx="50" cy="22" r="8" fill="#C9983A" opacity="0.9"/>
+    <text x="50" y="27" textAnchor="middle" fontSize="9" fill="#8B1A1A">✦</text>
+  </svg>
+);
+
+/** Tekstur Ulos inline — dipakai sebagai pattern background */
+const UlosBg = () => (
+  <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="ulos-curtain" x="0" y="0" width="48" height="24" patternUnits="userSpaceOnUse">
+        <rect width="48" height="24" fill="none"/>
+        <path d="M0 12 Q12 0 24 12 Q36 24 48 12" stroke="#C9983A" strokeWidth="1.2" fill="none" opacity="0.35"/>
+        <path d="M0 12 Q12 24 24 12 Q36 0 48 12" stroke="#8B1A1A" strokeWidth="0.7" fill="none" opacity="0.25"/>
+        <circle cx="24" cy="12" r="1.5" fill="#C9983A" opacity="0.4"/>
+        <rect x="0"  y="0"  width="4" height="24" fill="#8B1A1A" opacity="0.06"/>
+        <rect x="44" y="0"  width="4" height="24" fill="#8B1A1A" opacity="0.06"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#ulos-curtain)"/>
+  </svg>
+);
+
+// ─── Framer Motion Variants ────────────────────────────────────────────────
+
+const curtainExit = {
+  y: '-100%',
+  opacity: 0,
+  transition: { duration: 1.4, ease: [0.76, 0, 0.24, 1] },
+};
+
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.15, delayChildren: 0.2 } },
+};
+
+const fadeUp = {
+  hidden:  { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' } },
+};
+
+const cornerAnim = {
+  animate: { scale: [1, 1.04, 1], rotate: [0, 1.5, -1.5, 0] },
+  transition: { duration: 9, repeat: Infinity, ease: 'easeInOut' },
+};
+
+// ─── Main Component ────────────────────────────────────────────────────────
+
+const Curtain = ({ isOpen, onOpen, guestName }) => {
   return (
+    
     <AnimatePresence>
       {!isOpen && (
         <motion.div
           initial={{ opacity: 1 }}
-          exit={{ y: '-100%', opacity: 0 }}
-          transition={{ duration: 1.2, ease: [0.45, 0, 0.55, 1] }}
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#F0F9FF] overflow-hidden"
+          exit={curtainExit}
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden"
+          style={{ backgroundColor: '#1A0A0A' }} 
         >
-          {/* 1. Background Image - Opacity & Blur sesuai gambar */}
-          <div className="absolute inset-0 z-0">
-            <img 
-              src={coupleImg} 
-              alt="Couple Backdrop"
-              className="w-full h-full object-cover opacity-40 blur-[3px] scale-105"
+          <UlosBg />
+
+          <div className="absolute inset-0 z-[1]">
+            <img
+              src={coupleImg}
+              alt="Pasangan"
+              className="w-full h-full object-cover opacity-20 scale-105"
+              style={{ filter: 'sepia(60%) hue-rotate(320deg)' }}
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-transparent to-[#F0F9FF]/80" />
+            <div className="absolute inset-0"
+                 style={{
+                   background:
+                     'radial-gradient(ellipse at 50% 40%, transparent 30%, #1A0A0ACC 80%), ' +
+                     'linear-gradient(to bottom, #1A0A0A99 0%, transparent 30%, #1A0A0AEE 100%)',
+                 }}
+            />
           </div>
 
-          {/* 2. Dekorasi Bunga Sudut - Ukuran Lebih Proporsional */}
-          <motion.img {...flowerAnim} src={bunga} className="absolute -top-12 -left-12 w-44 md:w-64 opacity-80 z-10 pointer-events-none" />
-          <motion.img {...flowerAnim} src={bunga} className="absolute -top-12 -right-12 w-44 md:w-64 opacity-80 z-10 pointer-events-none scale-x-[-1]" />
-          <motion.img {...flowerAnim} src={bunga} className="absolute -bottom-12 -left-12 w-44 md:w-64 opacity-80 z-10 pointer-events-none -rotate-12" />
-          <motion.img {...flowerAnim} src={bunga} className="absolute -bottom-12 -right-12 w-44 md:w-64 opacity-80 z-10 pointer-events-none rotate-12 scale-x-[-1]" />
+          <div className="absolute inset-4 z-[2] border border-[#C9983A]/30 pointer-events-none rounded-sm" />
+          <div className="absolute inset-[18px] z-[2] border border-[#C9983A]/15 pointer-events-none rounded-sm" />
 
-          {/* 3. Main Content Section */}
-          <div className="relative z-30 text-center px-6 max-w-lg w-full flex flex-col items-center">
-            {/* Header Text - Sesuai Gambar */}
-            <p className="text-[12px] uppercase tracking-[0.4em] text-[#475569] font-bold mb-10">
-              Undangan Pernikahan
-            </p>
+          {/* Ornamen Sudut */}
+          <motion.div {...cornerAnim} className="absolute top-2 left-2 z-[3]"><CornerOrnament /></motion.div>
+          <motion.div {...cornerAnim} className="absolute top-2 right-2 z-[3] scale-x-[-1]"><CornerOrnament /></motion.div>
+          <motion.div {...cornerAnim} className="absolute bottom-2 left-2 z-[3] scale-y-[-1]"><CornerOrnament /></motion.div>
+          <motion.div {...cornerAnim} className="absolute bottom-2 right-2 z-[3] scale-[-1]"><CornerOrnament /></motion.div>
 
-            {/* Nama Tamu - Ukuran & Border Sesuai Gambar */}
-            <div className="space-y-4 mb-10">
-              <p className="text-[10px] text-[#64748b] uppercase tracking-[0.2em]">Kepada Bapak/Ibu/Saudara/i:</p>
-              <h2 className="text-4xl font-serif italic font-bold text-[#1E293B] border-b-2 border-[#38BDF8]/30 pb-2 inline-block px-4">
-                {guestName || "Tamu Undangan"}
-              </h2>
-            </div>
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            animate="visible"
+            className="relative z-[10] text-center px-6 max-w-md w-full flex flex-col items-center gap-4"
+          >
+            {/* 1. Label Atas - Wedding Modern */}
+            <motion.p variants={fadeUp}
+              className="text-[9px] uppercase tracking-[0.5em] font-semibold"
+              style={{ color: '#C9983A', fontFamily: '"Libre Baskerville", serif' }}>
+              — The Wedding Invitation —
+            </motion.p>
 
-            {/* Nama Mempelai - Ukuran Pas */}
-            <div className="mb-14">
-              <h1 className="text-5xl md:text-6xl font-serif italic text-[#334155] leading-snug tracking-tight">
-                Bagus <span className="text-[#38BDF8]">&</span> Ayu
-              </h1>
-            </div>
+            <motion.div variants={fadeUp}>
+              <GununganMini />
+            </motion.div>
 
-            {/* 4. Resized Button - Ukuran Kecil & Elegant */}
-            <div className="relative">
-              {/* Glow Effect Biru Terfokus */}
-              <div className="absolute inset-0 bg-[#38BDF8]/20 blur-2xl rounded-full scale-90 -z-10 animate-pulse" />
-              
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={onOpen}
-                className="flex items-center gap-3 bg-gradient-to-r from-[#5BB4C4]/90 to-[#4A9AA8]/90 backdrop-blur-md px-8 py-3 rounded-full border border-white/40 shadow-xl text-white"
+            <motion.div variants={fadeUp} className="flex justify-center">
+              <GorgatDivider />
+            </motion.div>
+
+            {/* 2. Nama Tamu */}
+            <motion.div variants={fadeUp} className="flex flex-col items-center gap-1">
+              <p className="text-[9px] uppercase tracking-[0.3em]"
+                 style={{ color: '#C9983A99', fontFamily: '"Libre Baskerville", serif' }}>
+                Special Invitation To:
+              </p>
+              <h2
+                className="text-3xl md:text-4xl italic pb-1"
+                style={{
+                  fontFamily: '"Cormorant Garamond", serif',
+                  color: '#FAF6ED',
+                  borderBottom: '1px solid #C9983A55',
+                  paddingBottom: '6px',
+                  letterSpacing: '0.04em',
+                }}
               >
-                <div className="bg-white/20 p-1.5 rounded-full border border-white/30">
-                  <Mail size={16} className="text-white" />
-                </div>
-                <span className="text-[10px] font-black uppercase tracking-[0.3em]">
-                  Buka Undangan
-                </span>
-              </motion.button>
-            </div>
-          </div>
+                {guestName || 'Tamu Undangan'}
+              </h2>
+            </motion.div>
 
-          {/* Copyright Branding */}
-          <div className="absolute bottom-8 left-0 w-full text-center z-30">
-            <p className="text-[8px] text-[#94a3b8] uppercase tracking-[0.4em] font-medium">
-              Created by firmanazhary
+            {/* 3. Nama Mempelai - Updated Nama */}
+            <motion.div variants={fadeUp} className="flex flex-col items-center leading-tight mt-2">
+              <h1 style={{
+                fontFamily: '"Cormorant Garamond", serif',
+                fontSize: 'clamp(2.8rem, 8vw, 4.5rem)',
+                color: '#FAF6ED',
+                letterSpacing: '0.03em',
+                lineHeight: 1.1,
+              }}>
+                Febri
+              </h1>
+              <span style={{
+                fontFamily: '"Cormorant Garamond", serif',
+                fontSize: '1.8rem',
+                color: '#C9983A',
+                lineHeight: 1,
+              }}>
+                ✦ &amp; ✦
+              </span>
+              <h1 style={{
+                fontFamily: '"Cormorant Garamond", serif',
+                fontSize: 'clamp(2.8rem, 8vw, 4.5rem)',
+                color: '#FAF6ED',
+                letterSpacing: '0.03em',
+                lineHeight: 1.1,
+              }}>
+                Suci
+              </h1>
+            </motion.div>
+
+            <motion.div variants={fadeUp} className="flex justify-center mt-1">
+              <GorgatDivider />
+            </motion.div>
+
+            {/* 4. Wedding Quote - Pengganti Dalil */}
+            <motion.p variants={fadeUp}
+              className="text-[10px] md:text-xs italic leading-relaxed px-6"
+              style={{ color: '#C9983A88', fontFamily: '"Libre Baskerville", serif' }}>
+              "Dua hati, dua jiwa, satu tujuan untuk melangkah bersama dalam ikatan suci pernikahan."
+            </motion.p>
+
+            <motion.div variants={fadeUp} className="mt-3 relative">
+              <div className="absolute inset-0 rounded-sm blur-xl opacity-40"
+                   style={{ backgroundColor: '#8B1A1A' }} />
+              <motion.button
+                whileHover={{ scale: 1.04, boxShadow: '0 0 24px #C9983A55' }}
+                whileTap={{ scale: 0.96 }}
+                onClick={onOpen}
+                className="relative flex items-center gap-3 px-10 py-3 rounded-sm border"
+                style={{
+                  background: 'linear-gradient(135deg, #8B1A1A, #6B1414)',
+                  borderColor: '#C9983A',
+                  borderWidth: '1px',
+                  color: '#FAF6ED',
+                  fontFamily: '"Libre Baskerville", serif',
+                  fontSize: '10px',
+                  letterSpacing: '0.35em',
+                  textTransform: 'uppercase',
+                }}
+              >
+                <span style={{ color: '#C9983A', fontSize: '14px' }}>✦</span>
+                Open Invitation
+                <span style={{ color: '#C9983A', fontSize: '14px' }}>✦</span>
+              </motion.button>
+            </motion.div>
+
+          </motion.div>
+
+          <div className="absolute bottom-6 left-0 w-full text-center z-[10]">
+            <p className="text-[8px] uppercase tracking-[0.45em]"
+               style={{ color: '#C9983A44', fontFamily: '"Libre Baskerville", serif' }}>
+              Digital Invitation by firmanazhary
             </p>
           </div>
+
         </motion.div>
       )}
     </AnimatePresence>
