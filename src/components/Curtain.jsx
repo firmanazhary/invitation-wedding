@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import coupleImg from '../assets/pasted-image.png';
+import coupleImg from '../assets/cici & febri .jpeg';
 
 // ─── Inline SVG Ornaments ──────────────────────────────────────────────────
 

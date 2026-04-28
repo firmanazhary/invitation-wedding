@@ -1,9 +1,7 @@
 import { motion } from 'framer-motion';
 import { DATA_PENGANTIN } from '../constans/content';
-import bunga from '../assets/bunga.png';
-import pastedImage from '../assets/pasted-image.png';
 
-// ─── SVG Ornamen ──────────────────────────────────────────────────────────────
+// ─── SVG Ornaments ──────────────────────────────────────────────────────────────
 
 const GorgatDivider = ({ width = 160 }) => (
   <svg viewBox={`0 0 ${width} 20`} style={{ width }} className="opacity-65 mx-auto"
@@ -16,7 +14,6 @@ const GorgatDivider = ({ width = 160 }) => (
   </svg>
 );
 
-/** Ulos background */
 const UlosBg = () => (
   <svg className="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
     <defs>
@@ -30,34 +27,6 @@ const UlosBg = () => (
   </svg>
 );
 
-/** Bingkai foto arch — gapura penutup */
-const ClosingFrameBorder = () => (
-  <svg viewBox="0 0 220 290" className="absolute inset-0 w-full h-full pointer-events-none z-10"
-       xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-    {/* Outer arch */}
-    <path d="M14 288 L14 118 Q14 14 110 14 Q206 14 206 118 L206 288"
-          fill="none" stroke="#C9983A" strokeWidth="2"/>
-    {/* Inner arch */}
-    <path d="M24 288 L24 122 Q24 26 110 26 Q196 26 196 122 L196 288"
-          fill="none" stroke="#8B1A1A" strokeWidth="1" opacity="0.5"/>
-    {/* Mahkota puncak */}
-    <circle cx="110" cy="17" r="6"   fill="#C9983A"/>
-    <circle cx="84"  cy="28" r="3.5" fill="#C9983A" opacity="0.6"/>
-    <circle cx="136" cy="28" r="3.5" fill="#C9983A" opacity="0.6"/>
-    <text x="110" y="52" textAnchor="middle" fontSize="14" fill="#C9983A" opacity="0.8">✦</text>
-    {/* Gorgat sisi kiri-kanan */}
-    {[140, 180, 220, 260].map((y, i) => (
-      <g key={i}>
-        <polygon points={`6,${y} 14,${y-6} 22,${y} 14,${y+6}`}  fill="#C9983A" opacity="0.45"/>
-        <polygon points={`198,${y} 206,${y-6} 214,${y} 206,${y+6}`} fill="#C9983A" opacity="0.45"/>
-      </g>
-    ))}
-    {/* Base line */}
-    <line x1="14" y1="287" x2="206" y2="287" stroke="#C9983A" strokeWidth="1.5"/>
-  </svg>
-);
-
-/** Percik emas naik */
 const GoldSpark = ({ i }) => (
   <motion.div className="absolute pointer-events-none rounded-full"
     style={{
@@ -71,7 +40,6 @@ const GoldSpark = ({ i }) => (
   />
 );
 
-/** Bunga melati gugur */
 const JasminePetal = ({ i }) => (
   <motion.div className="absolute pointer-events-none select-none"
     style={{
@@ -96,48 +64,25 @@ const fadeUp = {
   hidden:  { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: 'easeOut' } },
 };
-const bungaAnim = (delay = 0) => ({
-  animate: { rotate: [0, 4, -4, 0], scale: [1, 1.04, 1] },
-  transition: { duration: 7 + delay, repeat: Infinity, ease: 'easeInOut', delay },
-});
 
 // ─── Komponen Utama ───────────────────────────────────────────────────────────
 const Closing = () => {
   return (
     <section
-      className="relative py-28 px-6 overflow-hidden"
+      className="relative py-32 px-6 overflow-hidden flex items-center justify-center min-h-[80vh]"
       style={{ backgroundColor: '#0E0505' }}
     >
-      {/* Ulos texture */}
       <UlosBg />
-
-      {/* Radial vignette */}
       <div className="absolute inset-0 pointer-events-none"
            style={{ background: 'radial-gradient(ellipse 85% 85% at 50% 50%, transparent 15%, #080303DD 100%)' }}/>
 
-      {/* Double rim */}
-      <div className="absolute inset-5 border border-[#C9983A]/18 pointer-events-none rounded-sm z-[2]"/>
-      <div className="absolute inset-9 border border-[#C9983A]/08 pointer-events-none rounded-sm z-[2]"/>
-
-      {/* Percik emas */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-[1]">
         {Array.from({ length: 9 }, (_, i) => <GoldSpark key={i} i={i} />)}
       </div>
 
-      {/* Bunga melati gugur */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-[1]">
-        {Array.from({ length: 8 }, (_, i) => <JasminePetal key={i} i={i} />)}
+        {Array.from({ length: 12 }, (_, i) => <JasminePetal key={i} i={i} />)}
       </div>
-
-      {/* Bunga PNG sudut */}
-      <motion.img {...bungaAnim(0)} src={bunga}
-        className="absolute -top-8 -right-10 w-52 md:w-64 z-0 pointer-events-none rotate-180"
-        style={{ opacity: 0.38, filter: 'sepia(80%) saturate(60%) hue-rotate(320deg)' }}
-      />
-      <motion.img {...bungaAnim(1.3)} src={bunga}
-        className="absolute -bottom-8 -left-10 w-52 md:w-64 z-0 pointer-events-none"
-        style={{ opacity: 0.38, filter: 'sepia(80%) saturate(60%) hue-rotate(320deg)' }}
-      />
 
       {/* ══ MAIN CONTENT ══ */}
       <motion.div
@@ -145,133 +90,95 @@ const Closing = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: '-40px' }}
-        className="relative z-10 max-w-md mx-auto flex flex-col items-center gap-8 text-center"
+        className="relative z-10 max-w-xl mx-auto flex flex-col items-center gap-10 text-center"
       >
 
-        {/* Salam penutup Arab */}
-        <motion.div variants={fadeUp} className="flex flex-col items-center gap-3">
+        {/* Header Penutup */}
+        <motion.div variants={fadeUp} className="flex flex-col items-center gap-4">
           <p style={{
             fontFamily: '"Libre Baskerville", serif',
-            fontSize: '9px',
-            letterSpacing: '0.5em',
+            fontSize: '10px',
+            letterSpacing: '0.6em',
             textTransform: 'uppercase',
             color: '#C9983A',
           }}>
-            — Penutup —
+            — Final Note —
           </p>
-          <GorgatDivider width={180} />
-          <p dir="rtl" style={{
-            fontFamily: '"Scheherazade New", serif',
-            fontSize: 'clamp(1.15rem, 3.5vw, 1.45rem)',
-            color: '#FAF6ED',
-            lineHeight: 2.2,
-          }}>
-            السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ
-          </p>
-          <GorgatDivider width={180} />
-        </motion.div>
-
-        {/* Pesan undangan */}
-        <motion.div variants={fadeUp} className="flex flex-col gap-4 px-3">
-          <p style={{
-            fontFamily: '"Cormorant Garamond", serif',
-            fontSize: 'clamp(0.88rem, 2.8vw, 1rem)',
-            fontStyle: 'italic',
-            color: '#FAF6EDAA',
-            lineHeight: 1.95,
-          }}>
-            Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila
-            Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan do'a restu
-            kepada kami.
-          </p>
-          <p style={{
-            fontFamily: '"Cormorant Garamond", serif',
-            fontSize: 'clamp(0.88rem, 2.8vw, 1rem)',
-            fontStyle: 'italic',
-            color: '#FAF6ED77',
-            lineHeight: 1.9,
-          }}>
-            Atas perhatiannya, kami mengucapkan
-            <span style={{ color: '#C9983A' }}> Jazaakumullah Khairan</span>.
-          </p>
-        </motion.div>
-
-        {/* Foto pasangan dalam bingkai arch */}
-        <motion.div
-          variants={fadeUp}
-          className="relative mx-auto"
-          style={{ width: 200, height: 260 }}
-        >
-          {/* Foto */}
-          <div className="absolute inset-0 overflow-hidden"
-               style={{
-                 borderRadius: '50% 50% 0 0 / 55% 55% 0 0',
-                 background: '#1A0A0A',
-               }}>
-            <img
-              src={pastedImage}
-              alt="Closing Illustration"
-              className="w-full h-full object-cover"
-              style={{ filter: 'sepia(15%) contrast(1.05)', opacity: 0.9 }}
-            />
-            {/* Overlay gradient bawah */}
-            <div className="absolute inset-0"
-                 style={{ background: 'linear-gradient(to bottom, transparent 55%, #0E0505CC 100%)' }}/>
-          </div>
-          {/* Bingkai arch SVG */}
-          <ClosingFrameBorder />
-        </motion.div>
-
-        {/* Nama mempelai */}
-        <motion.div variants={fadeUp} className="flex flex-col items-center gap-3">
           <GorgatDivider width={200} />
-          <h3 style={{
+        </motion.div>
+
+        {/* Pesan Terima Kasih Modern */}
+        <motion.div variants={fadeUp} className="flex flex-col gap-6 px-4">
+          <h2 style={{
             fontFamily: '"Cormorant Garamond", serif',
-            fontSize: 'clamp(2rem, 7vw, 2.8rem)',
+            fontSize: 'clamp(1.5rem, 5vw, 2.2rem)',
+            color: '#FAF6ED',
+            fontStyle: 'italic',
+            lineHeight: 1.4,
+          }}>
+            Thank you for being part of our story.
+          </h2>
+          <p style={{
+            fontFamily: '"Libre Baskerville", serif',
+            fontSize: '11px',
+            color: '#FAF6ED88',
+            lineHeight: 2,
+            letterSpacing: '0.05em',
+            maxWidth: '320px',
+            margin: '0 auto'
+          }}>
+            Kehadiran dan doa restu Anda adalah pelengkap kebahagiaan bagi perjalanan baru kami.
+          </p>
+        </motion.div>
+
+        {/* Nama Mempelai Simple & Bold */}
+        <motion.div variants={fadeUp} className="flex flex-col items-center gap-4 my-4">
+          <GorgatDivider width={120} />
+          <h1 style={{
+            fontFamily: '"Cormorant Garamond", serif',
+            fontSize: 'clamp(2.5rem, 8vw, 4rem)',
             color: '#FAF6ED',
             fontStyle: 'italic',
             fontWeight: 600,
-            letterSpacing: '0.04em',
-            lineHeight: 1.1,
+            letterSpacing: '0.05em',
+            lineHeight: 1,
           }}>
-            {DATA_PENGANTIN.pria.nama}
-            <span style={{ color: '#C9983A', margin: '0 12px' }}>✦ &amp; ✦</span>
-            {DATA_PENGANTIN.wanita.nama}
-          </h3>
-          <GorgatDivider width={200} />
+            Febri <span style={{ color: '#C9983A', fontSize: '1.5rem', verticalAlign: 'middle', margin: '0 8px' }}>&</span> Suci
+          </h1>
+          <GorgatDivider width={120} />
         </motion.div>
 
-        {/* Hashtag */}
+        {/* Hashtag & Closing Ornament */}
+        <motion.div variants={fadeUp} className="space-y-6">
+          <p style={{
+            fontFamily: '"Libre Baskerville", serif',
+            fontSize: '10px',
+            letterSpacing: '0.5em',
+            textTransform: 'uppercase',
+            color: '#C9983A88',
+          }}>
+            #FebriSuciJourney
+          </p>
+          
+          <p style={{ color: '#C9983A', fontSize: '1.2rem', letterSpacing: '0.8em' }}>
+            ✦ ✧ ✦
+          </p>
+        </motion.div>
+
+        {/* Clean Footer */}
         <motion.p variants={fadeUp} style={{
           fontFamily: '"Libre Baskerville", serif',
-          fontSize: '9px',
-          letterSpacing: '0.4em',
-          textTransform: 'uppercase',
-          color: '#C9983A88',
-        }}>
-          {DATA_PENGANTIN.hashtag ?? '#AyuDanBagus2026'}
-        </motion.p>
-
-        {/* Ornamen penutup final */}
-        <motion.p variants={fadeUp}
-          style={{ color: '#C9983A', fontSize: '1.1rem', letterSpacing: '0.6em' }}>
-          ✦ ✧ ✦ ✧ ✦
-        </motion.p>
-
-        {/* Copyright */}
-        <motion.p variants={fadeUp} style={{
-          fontFamily: '"Libre Baskerville", serif',
-          fontSize: '7px',
+          fontSize: '8px',
           letterSpacing: '0.45em',
           textTransform: 'uppercase',
-          color: '#C9983A28',
+          color: '#C9983A33',
+          marginTop: '20px'
         }}>
-          © 2026 Crafted with ♥ by firmanazhary
+          Crafted by firmanazhary
         </motion.p>
 
       </motion.div>
 
-      {/* Gradient fade bawah — benar-benar gelap di ujung */}
       <div className="absolute bottom-0 left-0 right-0 h-20 pointer-events-none z-20"
            style={{ background: 'linear-gradient(to top, #0E0505, transparent)' }}/>
     </section>

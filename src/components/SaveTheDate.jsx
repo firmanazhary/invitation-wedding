@@ -236,7 +236,7 @@ const SaveTheDate = () => {
           initial={{ scale: 1.15 }}
           whileInView={{ scale: 1 }}
           transition={{ duration: 2.2 }}
-          src="https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=1200"
+          src="https://images.unsplash.com/photo-1688741622804-62db224a0f18?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8YmF0YWt8ZW58MHx8MHx8fDA%3D"
           className="w-full h-full object-cover"
           alt="Wedding Backdrop"
           style={{ filter: 'sepia(40%) hue-rotate(320deg) saturate(60%)' }}

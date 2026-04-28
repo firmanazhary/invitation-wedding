@@ -14,16 +14,15 @@ import Navbar from './components/Navbar';
 import Verse from './components/Quote';
 import Mempelai from './components/Mempelai';
 import SaveTheDate from './components/SaveTheDate';
-import Adab from './components/Adab';
+
 import LoveStory from './components/LoveStory';
-import Doa from './components/Doa';
+
 import Closing from './components/Closing';
 import Footer from './components/Footer';
-import Nasehat from './components/Nasehat';
+
 import Hadiah from './components/Hadiah';
 // Import MusicPlayer yang baru dibuat
 import MusicPlayer from './components/Nasyid'; 
-import Gallery from './components/Gallery';
 
 function AppContent() {
   const [searchParams] = useSearchParams();
@@ -63,10 +62,9 @@ function AppContent() {
                <GuestBook guestName={guestName} />
             </section>
             <Hadiah />
-            <Adab />
-            <Nasehat />
-            <Doa />
-            <Gallery/>
+      
+        
+      
             <Closing />
             <Navbar />
             <Footer />

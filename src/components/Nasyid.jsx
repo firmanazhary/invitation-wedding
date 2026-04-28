@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Volume2, VolumeX } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import nasyidFile from '../assets/nasyid.mpeg';
+import nasyidFile from '../assets/sound.mp3';
 
 const MusicPlayer = ({ isOpen }) => {
   const [isPlaying, setIsPlaying] = useState(false);
